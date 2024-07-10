@@ -3,29 +3,36 @@
 import React, { useEffect } from 'react'
 import {Button } from '@/components/ui/button'
 import { LogoutLink, useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs'
-import { useMutation, useQuery } from 'convex/react'
+import { useConvex, useMutation, useQuery } from 'convex/react'
 import { api } from '@/convex/_generated/api'
 
 function Dashboard() {
-
+const convext= useConvex();
 const {user}:any = useKindeBrowserClient();
-  const getUser = useQuery(api.user.getUser,{email:user?.email})
+  // const getUser = useQuery(api.user.getUser,{email:user?.email})
 const createUser = useMutation(api.user.createUser)
 
 useEffect(() => {
 if(user){
- if(getUser=== undefined){
-  createUser({
-    name:user.given_name,
-    email:user.email,
-    image:user.picture
-  }).then(resp => {
-    console.log(resp)
-  })
- }
+ checkUser()
 }
  
 },[user])
+
+
+const checkUser = async() => {
+
+  const result = await convext.query(api.user.getUser,{email:user?.email});
+  if(!result?.length){
+    createUser({
+      name:user.given_name,
+      email:user.email,
+      image:user.picture
+    }).then(resp => {
+      console.log(resp)
+    })
+   }
+}
 
   return (
     <div>
