@@ -19,7 +19,7 @@ console.log(user);
     <div>
       <Header/>
       <Hero/>
-      <Footer/>
+
 
     </div>
     
