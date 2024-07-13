@@ -2,11 +2,12 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import Image from 'next/image'
+import { useState } from 'react'
 
 
 
 function CreateTeam() {
-
+const [inpt, setInput] = useState();
   return (
     <div className=' px-6 md:px-16 my-16'>
       <Image src='/logo-black.png'
@@ -23,6 +24,7 @@ function CreateTeam() {
            />
         </div>
         <Button className='bg-blue-500 mt-9 w-[30%] hover:bg-blue-600'
+
         >Create Team</Button>
       </div>
     </div>
