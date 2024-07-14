@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Image from 'next/image';
 import { ChevronDown, Users, Settings, LogOut } from 'lucide-react';
+import {api} from '@/convex/_generated/api';
 import {
     Popover,
     PopoverContent,
@@ -8,6 +9,7 @@ import {
 } from "@/components/ui/popover";
 import { LogoutLink } from '@kinde-oss/kinde-auth-nextjs';
 import { Separator } from '@/components/ui/separator';
+import { useConvex } from 'convex/react';
 
 function SideNavTopSection({user}) {
     const menu = [
@@ -24,9 +26,17 @@ function SideNavTopSection({user}) {
             icon: Settings
         }
     ];
+ 
 
-
-
+    useEffect(() => {
+        user&& getTeamList();
+        
+    },[user])
+    const convex = useConvex();
+    const getTeamList= async() => {
+        const result = await convex.query(api.teams.getTeam, {email:user.email})
+        console.log("TeamList", result)
+    }
     return (
         <Popover>
             <PopoverTrigger>  
@@ -85,5 +95,4 @@ function SideNavTopSection({user}) {
         </Popover>
     );
 }
-
 export default SideNavTopSection;
