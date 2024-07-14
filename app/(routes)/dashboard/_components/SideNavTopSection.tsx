@@ -7,8 +7,9 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover";
 import { LogoutLink } from '@kinde-oss/kinde-auth-nextjs';
+import { Separator } from '@/components/ui/separator';
 
-function SideNavTopSection() {
+function SideNavTopSection({user}) {
     const menu = [
         {
             id: 1,
@@ -23,6 +24,8 @@ function SideNavTopSection() {
             icon: Settings
         }
     ];
+
+
 
     return (
         <Popover>
@@ -47,6 +50,7 @@ function SideNavTopSection() {
                         Team Name
                     </h2>
                 </div>
+                <Separator className='mt-2 bg-slate-100'/>
                 {/* Option Section */}
                 <div>
                     {menu.map((item, idex) => (
@@ -61,6 +65,22 @@ function SideNavTopSection() {
                             </LogoutLink>
 
                 </div>
+                <Separator className='mt-2 bg-slate-100'/>
+        
+            {/* userInfo */}
+          
+                {user &&   
+                <div className='mt-2 flex gap-2 items-center'>
+                <Image src={user?.picture} alt='user'
+                width={30}
+                height={30} 
+                className='rounded-full' />
+                <div>
+                    <h2 className='text-[14px] font-bold'>{user?.given_name}{user?.family_name}</h2>
+                    <h2 className='text-[12px] font-gray-500'>{user?.email}</h2>
+                </div>
+            </div>  
+            }
             </PopoverContent>
         </Popover>
     );
