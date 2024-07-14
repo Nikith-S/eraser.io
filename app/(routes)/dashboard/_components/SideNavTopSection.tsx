@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { ChevronDown, Users, Settings, LogOut } from 'lucide-react';
+import { ChevronDown, Users, Settings, LogOut, LayoutGrid } from 'lucide-react';
 import { api } from '@/convex/_generated/api';
 import {
     Popover,
@@ -11,6 +11,7 @@ import { LogoutLink } from '@kinde-oss/kinde-auth-nextjs';
 import { Separator } from '@/components/ui/separator';
 import { useConvex } from 'convex/react';
 import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/button';
 
 export interface Team {
     createdBy: string,
@@ -64,6 +65,7 @@ function SideNavTopSection({ user }) {
     }
 
     return (
+        <div>
         <Popover>
             <PopoverTrigger>
                 <div className="flex items-center gap-3 hover:bg-slate-200 p-3 rounded-md cursor-pointer">
@@ -122,6 +124,15 @@ function SideNavTopSection({ user }) {
                 }
             </PopoverContent>
         </Popover>
+
+        {/* All File Button */}
+                <Button variant='outline' className='w-full justify-start gap-2 font-bold mt-8 bg-gray-100 '>
+                <LayoutGrid className='h-5 w-5'/>
+                All Files
+                </Button>
+
+
+        </div>
     );
 }
 
