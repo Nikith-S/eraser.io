@@ -5,6 +5,7 @@ import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs';
 import { useConvex } from 'convex/react';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react'
+import SideNav from './_components/SideNav';
 
 function DashboardLayout( 
     {
@@ -32,7 +33,14 @@ router.push('teams/create')
 
   return (
     <div>
+      <div className="grid grid-cols-4">
+        <div>
+        <SideNav/>
+        </div>
+      <div className="grid col-3">
       {children}
+      </div> 
+    </div>
     </div>
   )
 }
