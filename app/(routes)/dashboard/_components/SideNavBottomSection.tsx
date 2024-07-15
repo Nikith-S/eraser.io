@@ -34,13 +34,13 @@ function SideNavBottomSection() {
     New File
       </Button>
 
-    {/* Progress Bar */}
-
-
-    <div className="h-4 w-full bg-gray-200 rounded-full mt-5">
-      <div className="h-4 w-[40%] bg-blue-600 rounded-full">
+       {/* Progress Bar  */}
+       <div className='h-4 w-full bg-gray-200 rounded-full mt-5'>
+          <div className={`h-4  bg-blue-600 rounded-full`}
+          style={{ width: `${(totalFiles/5)*100}%` }}
+         >
+          </div>
       </div>
-    </div>
 
     <h2 className='text-[12px] mt-3'> 
       <strong>1</strong> out of <strong>5</strong> files used</h2>
