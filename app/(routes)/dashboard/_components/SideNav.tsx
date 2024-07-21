@@ -9,6 +9,11 @@ import SideNavBottomSection from './SideNavBottomSection';
 function SideNav() {
 
     const {user} = useKindeBrowserClient();
+    const onFileCreate = () => {
+
+
+      
+    }
 
   return (
     <div className=' h-screen fixed w-72 border-r  border-[1px]   px-6 
@@ -18,7 +23,7 @@ function SideNav() {
       </div>
     
        <div>
-       <SideNavBottomSection/>
+       <SideNavBottomSection onFileCreate = {onFileCreate}/>
        </div>
     </div>
   );
