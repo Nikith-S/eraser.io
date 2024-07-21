@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 
-function SideNavBottomSection({onFileCreate}: any) {
+function SideNavBottomSection({ onFileCreate }: any) {
   const menuList = [
     {
       id: 1,
@@ -46,7 +46,7 @@ function SideNavBottomSection({onFileCreate}: any) {
       ))}
       {/* Add New File Button */}
       <Dialog>
-        <DialogTrigger className="w-full">
+        <DialogTrigger className="w-full" asChild>
           <Button className="w-full bg-blue-600 hover:bg-blue-700 justify-start mt-3">
             New File
           </Button>
@@ -55,8 +55,11 @@ function SideNavBottomSection({onFileCreate}: any) {
           <DialogHeader>
             <DialogTitle>Create New File</DialogTitle>
             <DialogDescription>
-              <Input placeholder="Enter file name " className="mt-3"
-                 onChange={(e) => setFileInput(e.target.value)} />
+              <Input
+                placeholder="Enter file name "
+                className="mt-3"
+                onChange={(e) => setFileInput(e.target.value)}
+              />
             </DialogDescription>
           </DialogHeader>
           <DialogFooter className="">
@@ -67,7 +70,6 @@ function SideNavBottomSection({onFileCreate}: any) {
             hover:bg-blue-700"
                 disabled={!(fileInput && fileInput.length > 3)}
                 onClick={() => onFileCreate(fileInput)}
-            
               >
                 Create
               </Button>
