@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 
-function SideNavBottomSection({ onFileCreate }: any) {
+function SideNavBottomSection({ onFileCreate, totalFiles }: any) {
   const menuList = [
     {
       id: 1,
@@ -36,11 +36,15 @@ function SideNavBottomSection({ onFileCreate }: any) {
   ];
 
   const [fileInput, setFileInput] = useState("");
+
   return (
     <div>
-      {menuList?.map((menu, index) => (
-        <h2 className="flex gap-2 p-1 px-2 text-[14px] hover:bg-gray-100 rounded-md cursor-pointer">
-          <menu.icon className=" h-5 w-5" />
+      {menuList?.map((menu) => (
+        <h2
+          key={menu.id}
+          className="flex gap-2 p-1 px-2 text-[14px] hover:bg-gray-100 rounded-md cursor-pointer"
+        >
+          <menu.icon className="h-5 w-5" />
           {menu.name}
         </h2>
       ))}
@@ -56,7 +60,7 @@ function SideNavBottomSection({ onFileCreate }: any) {
             <DialogTitle>Create New File</DialogTitle>
             <DialogDescription>
               <Input
-                placeholder="Enter file name "
+                placeholder="Enter file name"
                 className="mt-3"
                 onChange={(e) => setFileInput(e.target.value)}
               />
@@ -66,8 +70,7 @@ function SideNavBottomSection({ onFileCreate }: any) {
             <DialogClose asChild>
               <Button
                 type="button"
-                className="bg-blue-600
-            hover:bg-blue-700"
+                className="bg-blue-600 hover:bg-blue-700"
                 disabled={!(fileInput && fileInput.length > 3)}
                 onClick={() => onFileCreate(fileInput)}
               >
@@ -78,13 +81,16 @@ function SideNavBottomSection({ onFileCreate }: any) {
         </DialogContent>
       </Dialog>
 
-      {/* Progress Bar  */}
+      {/* Progress Bar */}
       <div className="h-4 w-full bg-gray-200 rounded-full mt-5">
-        <div className={`h-4  w-[40%] bg-blue-600 rounded-full`}></div>
+        <div
+          className="h-4 bg-blue-600 rounded-full"
+          style={{ width: `${(totalFiles / 5) * 100}%` }}
+        ></div>
       </div>
 
       <h2 className="text-[12px] mt-3">
-        <strong>1</strong> out of <strong>5</strong> files used
+        <strong>{totalFiles}</strong> out of <strong>5</strong> files used
       </h2>
       <h2 className="text-[12px] mt-1">
         Upgrade your plan for unlimited access
