@@ -1,25 +1,25 @@
-import React from 'react'
-import React from 'react'
-import {
-    Dialog,
-    DialogClose,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-  } from "@/components/ui/dialog"
-import Link from 'next/link'
+// import React from 'react'
+// import React from 'react'
+// import {
+//     Dialog,
+//     DialogClose,
+//     DialogContent,
+//     DialogDescription,
+//     DialogFooter,
+//     DialogHeader,
+//     DialogTitle,
+//     DialogTrigger,
+//   } from "@/components/ui/dialog"
+// import Link from 'next/link'
 
-const PricingDialog = () => {
-  return (
-    <div>
-      pricing dialog 
+// const PricingDialog = () => {
+//   return (
+//     <div>
+//       pricing dialog
 
-    </div>
-    
-  )
-}
+//     </div>
 
-export default PricingDialog
+//   )
+// }
+
+// export default PricingDialog

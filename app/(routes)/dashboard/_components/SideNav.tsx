@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import SideNavTopSection, { Team } from "./SideNavTopSection";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import SideNavBottomSection from "./SideNavBottomSection";
 import { useConvex, useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { toast } from "sonner";
+import { FileListContext } from "@/app/_context/FileListContext";
 
 function SideNav() {
   const { user } = useKindeBrowserClient();
@@ -30,6 +31,7 @@ function SideNav() {
     }).then(
       (resp) => {
         if (resp) {
+          getFiles();
           toast("File created successfully");
         }
       },
@@ -44,8 +46,12 @@ function SideNav() {
       teamId: activeTeam?._id,
     });
     console.log(result);
+    setFileList_(result);
     setTotalFiles(result?.length);
   };
+
+  const { fileList_, setFileList_ } = useContext(FileListContext);
+
   return (
     <div className="h-screen fixed w-72 border-r border-[1px] px-6 flex flex-col">
       <div className="flex-1">
