@@ -3,8 +3,15 @@ import React, { useContext, useEffect, useState } from "react";
 import moment from "moment";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import Image from "next/image";
-import { MoreHorizontal } from "lucide-react";
-
+import { Archive, MoreHorizontal } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export interface FILE {
   archive: boolean;
@@ -70,7 +77,15 @@ const FileList = () => {
                     />
                   </td>
                   <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                    <MoreHorizontal />
+                    <DropdownMenu>
+                      <DropdownMenuTrigger>
+                        <MoreHorizontal />
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent>
+                        <DropdownMenuItem>
+                          <Archive className="h-4 w-4"/> Archive</DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
                   </td>
                 </tr>
               ))}
