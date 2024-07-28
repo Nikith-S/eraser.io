@@ -1,13 +1,29 @@
 import { FileListContext } from "@/app/_context/FileListContext";
 import React, { useContext, useEffect, useState } from "react";
+import moment from "moment";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import Image from "next/image";
+import { MoreHorizontal } from "lucide-react";
 
+
+export interface FILE {
+  archive: boolean;
+  createdBy: string;
+  document: string;
+  fileName: string;
+  teamId: string;
+  whiteBoard: string;
+  _id: string;
+  _creationTime: number;
+}
 const FileList = () => {
   const { fileList_, setFileList_ } = useContext(FileListContext);
-
-  const [fileList, setFileList] = useState();
+  const { user }: any = useKindeBrowserClient();
+  const [fileList, setFileList] = useState<any>();
 
   useEffect(() => {
     setFileList(fileList_);
+    console.log(fileList_);
   }, [fileList_]);
 
   return (
@@ -32,20 +48,32 @@ const FileList = () => {
           </thead>
 
           <tbody className="divide-y divide-gray-200">
-            <tr>
-              <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                John Doe
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                24/05/1995
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                Web Developer
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                $120,000
-              </td>
-            </tr>
+            {fileList &&
+              fileList.map((file: FILE, index: number) => (
+                <tr>
+                  <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                    {file.fileName}
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                    {moment(file._creationTime).format("DD MM YYYY")}
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                    {moment(file._creationTime).format("DD MM YYYY")}
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                    <Image
+                      src={user?.picture}
+                      alt="user"
+                      width={30}
+                      height={30}
+                      className="rounded-full"
+                    />
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                    <MoreHorizontal />
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
