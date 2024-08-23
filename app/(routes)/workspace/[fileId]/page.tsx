@@ -6,6 +6,7 @@ import Editor from "../_components/Editor";
 import { useConvex } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { FILE } from "../../dashboard/_components/FileList";
+import Canvas from "../_components/Canvas";
 
 const Workspace = ({ params }: any) => {
   const [triggerSave, setTriggerSave] = useState(false);
@@ -42,7 +43,9 @@ const Workspace = ({ params }: any) => {
         </div>
 
         {/* whiteBoardcanvas  */}
-        <div className="bg-red-400 h-screen">canvas</div>
+        <div className=" h-screen border-l">
+          <Canvas />
+        </div>
       </div>
     </div>
   );
