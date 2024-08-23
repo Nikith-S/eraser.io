@@ -14,6 +14,7 @@ import Warning from "@editorjs/warning";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { toast } from "sonner";
+import { FILE } from "../../dashboard/_components/FileList";
 
 const rawDocument = {
   time: 1550476186479,
@@ -37,15 +38,25 @@ const rawDocument = {
   version: "2.8.1",
 };
 
-const Editor = ({ onSaveTrigger, fileId }: any) => {
+const Editor = ({
+  onSaveTrigger,
+  fileId,
+  fileData,
+}: {
+  onSaveTrigger: any;
+  fileId: any;
+  fileData: FILE;
+}) => {
   const ref = useRef<EditorJS>();
 
   const [document, setDocument] = useState(rawDocument);
   const updateDocument = useMutation(api.files.updateDocument);
 
   useEffect(() => {
-    initEditor();
-  }, []);
+    if (fileData) {
+      initEditor();
+    }
+  }, [fileData]);
 
   useEffect(() => {
     if (onSaveTrigger) {
@@ -66,7 +77,6 @@ const Editor = ({ onSaveTrigger, fileId }: any) => {
         })
         .then((resp) => {
           console.log("Update response:", resp);
-
           toast("Document Updated");
         })
         .catch((e) => {
@@ -101,7 +111,7 @@ const Editor = ({ onSaveTrigger, fileId }: any) => {
         paragraph: Paragraph,
         warning: Warning,
       },
-      data: document,
+      data: fileData?.document ? JSON.parse(fileData.document) : document,
     });
 
     ref.current = editor;
@@ -115,3 +125,5 @@ const Editor = ({ onSaveTrigger, fileId }: any) => {
 };
 
 export default Editor;
+
+
