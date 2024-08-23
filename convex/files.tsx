@@ -30,3 +30,14 @@ export const getFiles = query({
     return result;
   },
 });
+
+const updateDocument = mutation({
+  args: {
+    id: v.id("files"),
+    document: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const result = await ctx.db.patch(arg.id, { document: args.document });
+    return result;
+  },
+});
