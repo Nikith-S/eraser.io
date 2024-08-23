@@ -11,7 +11,9 @@ import Checklist from "@editorjs/checklist";
 import Paragraph from "@editorjs/paragraph";
 // @ts-ignore
 import Warning from "@editorjs/warning";
-import { error } from "console";
+import { useMutation } from "convex/react";
+import { api } from "@/convex/_generated/api";
+import { toast } from "sonner";
 
 const rawDocument = {
   time: 1550476186479,
@@ -35,20 +37,20 @@ const rawDocument = {
   version: "2.8.1",
 };
 
-
-const updateDocument
-
-const Editor = ({ onSaveTrigger }: any) => {
+const Editor = ({ onSaveTrigger, fileId }: any) => {
   const ref = useRef<EditorJS>();
 
   const [document, setDocument] = useState(rawDocument);
+  const updateDocument = useMutation(api.files.updateDocument);
+
   useEffect(() => {
     initEditor();
   }, []);
 
   useEffect(() => {
-    console.log("on Save Trigger", onSaveTrigger);
-    onSaveTrigger && onSaveDocument();
+    if (onSaveTrigger) {
+      onSaveDocument();
+    }
   }, [onSaveTrigger]);
 
   const onSaveDocument = () => {
@@ -57,9 +59,19 @@ const Editor = ({ onSaveTrigger }: any) => {
         .save()
         .then((outputData) => {
           console.log("Article data: ", outputData);
+          return updateDocument({
+            id: fileId,
+            document: JSON.stringify(outputData),
+          });
         })
-        .catch((error) => {
-          console.log("Saving Failed", error);
+        .then((resp) => {
+          console.log("Update response:", resp);
+
+          toast("Document Updated");
+        })
+        .catch((e) => {
+          console.log("Error occurred:", e);
+          toast("Server Error");
         });
     }
   };
@@ -89,7 +101,6 @@ const Editor = ({ onSaveTrigger }: any) => {
         paragraph: Paragraph,
         warning: Warning,
       },
-      holder: "editorjs",
       data: document,
     });
 
