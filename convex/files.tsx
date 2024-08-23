@@ -31,7 +31,7 @@ export const getFiles = query({
   },
 });
 
-const updateDocument = mutation({
+export const updateDocument = mutation({
   args: {
     id: v.id("files"),
     document: v.string(),

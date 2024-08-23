@@ -35,6 +35,9 @@ const rawDocument = {
   version: "2.8.1",
 };
 
+
+const updateDocument
+
 const Editor = ({ onSaveTrigger }: any) => {
   const ref = useRef<EditorJS>();
 
