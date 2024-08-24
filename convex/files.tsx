@@ -51,3 +51,15 @@ export const getFileById = query({
     return result;
   },
 });
+
+
+// file by id which was not updated 
+// export const getFileById = query({
+//   args: {
+//     _id: v.id("files"),
+//   },
+//   handler: async (ctx, args) => {
+//     const result = await ctx.db.get(args._id);
+//     return result;
+//   },
+// });
